@@ -17,7 +17,7 @@ async function bootstrap() {
 
   app.enableCors({
     allowedHeaders: ['content-type', 'Authorization'],
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://juaness98.github.io/test-front', 'https://juaness98.github.io/', 'https://juaness98.github.io/*'],
     credentials: true,
   });
 

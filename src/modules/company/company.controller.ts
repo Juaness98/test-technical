@@ -1,8 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { CompanyService } from "../../services/company/company.service";
-import { CreateCompanyDto, UpdateCompanyDto } from "../../dtos/company/companyDto";
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
+import { CompanyService } from "./services/company.service";
+import { UpdateCompanyDto } from "./dtos/updateCompany.dto";
+import { CompanyEntity } from "./entities/company.entity";
+import { CreateCompanyDto } from "./dtos/createCompany.dto";
+import { JwtAuthGuard } from "../auth/jwt.auth.guard";
 
 @Controller('company')
+@UseGuards(JwtAuthGuard)
 export class CompanyController {
   constructor(private companyService: CompanyService) {}
 
@@ -21,8 +25,8 @@ export class CompanyController {
     return this.companyService.create(body);
   }
 
-  @Put(':id')
-  update(@Param('id') id: string, @Body() payload: UpdateCompanyDto) {
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() payload: UpdateCompanyDto): Promise<CompanyEntity> {
     return this.companyService.update(id, payload);
   }
 

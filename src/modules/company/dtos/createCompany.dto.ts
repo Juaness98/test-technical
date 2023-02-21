@@ -1,5 +1,4 @@
 import { IsNotEmpty, IsString } from "class-validator";
-import { PartialType } from "@nestjs/mapped-types";
 
 export class CreateCompanyDto {
   @IsString()
@@ -11,10 +10,8 @@ export class CreateCompanyDto {
   direction: string;
 
   @IsNotEmpty()
-  nit: number;
+  nit: string;
 
   @IsNotEmpty()
-  phoneNumber: number;
+  phoneNumber: string;
 }
-
-export class UpdateCompanyDto extends PartialType(CreateCompanyDto) {}
